@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "3e9966d7-315f-4e30-b47a-5a93768d734f",
+		"name": "BHIVE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "40478842"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"mani\",\n    \"email\": \"mani@123.com\",\n    \"password\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8000/api/v1/register/"
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"mani@mani.com\",\n    \"password\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8000/api/v1/login/"
+			},
+			"response": []
+		},
+		{
+			"name": "fetch fund ",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "123",
+						"username": "adoniss"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mutual_fund\": \"119551\",\n    \"units\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8000/api/v1/funds/funds/\"Aditya Birla Sun Life Mutual Fund\""
+			},
+			"response": []
+		},
+		{
+			"name": "create portfolio",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "123",
+						"username": "adoniss"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mutual_fund\": \"119551\",\n    \"units\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8000/api/v1/funds/portfolio/"
+			},
+			"response": []
+		}
+	]
+}
