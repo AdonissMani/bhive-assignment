@@ -53,7 +53,7 @@ pipenv install
 ### **4. Set Up Environment Variables**
 Create a `.env` file in the project root directory with the following content:
 ```
-RAPIDAPI_KEY=your_rapidapi_key
+RAPID_API_KEY="52259d75b8msh1ad52fa38fd6d36p105555jsn06a9d70b4cb8" 
 ```
 
 ### **5. Apply Migrations**
