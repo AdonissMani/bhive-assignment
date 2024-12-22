@@ -36,8 +36,8 @@ This project implements a backend application for a mutual fund brokerage firm. 
 
 ### **1. Clone the Repository**
 ```bash
-git clone https://github.com/your-username/mutual-fund-broker.git
-cd mutual-fund-broker
+git clone https://github.com/AdonissMani/bhive-assignment
+cd bhive-assignment
 ```
 
 ### **2. Create a Virtual Environment**
