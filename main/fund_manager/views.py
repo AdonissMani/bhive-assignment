@@ -1,13 +1,14 @@
 from rest_framework.permissions import IsAuthenticated
-from fund_manager.models import MutualFund
+from fund_manager.models import MutualFund, Portfolio
 from .utils import fetch_open_ended_schemes
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import PortfolioSerializer
+from .serializers import MutualFundSerializer, PortfolioSerializer
+from rest_framework import generics
 
-class FundListView(APIView):
+class FetchFundListView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, fund_family):
@@ -29,8 +30,10 @@ class FundListView(APIView):
             )
         return Response(data, status=200)
 
-
-
+class FetchFundView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = MutualFund.objects.all()
+    serializer_class = MutualFundSerializer
 
 
 class PortfolioCreateView(APIView):
@@ -43,5 +46,13 @@ class PortfolioCreateView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class PortfolioListView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = PortfolioSerializer
+
+    def list(self, request, *args, **kwargs):
+        portfolios = Portfolio.objects.filter(myuser=request.user)
+        serializer = self.serializer_class(portfolios, many=True)
+        return Response({'portfolios': serializer.data}, status=status.HTTP_200_OK)
 
 

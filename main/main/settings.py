@@ -38,9 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_celery_beat',
+    'corsheaders',
     'user',
-    'fund_manager'
-    
+    'fund_manager',
 ]
 
 MIDDLEWARE = [
@@ -145,15 +146,9 @@ AUTHENTICATION_BACKENDS = [
 # Redis as the message broker
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 
-# Celery backend for storing results (optional)
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-
 # Time zone
 CELERY_TIMEZONE = 'UTC'
 
 # Celery configuration for task serialization
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
-INSTALLED_APPS += [
-    'django_celery_beat',
-]

@@ -18,10 +18,18 @@ This project implements a backend application for a mutual fund brokerage firm. 
 - Python 3.8+
 - Django 4.x
 - Django REST Framework
-- `python-decouple` for environment variable management
-- `requests` for API integration
 - SQLite (default database)
+- RapidAPI
+- Redis (for caching)
+- celery (for scheduling tasks)
 
+---
+---
+## Prerequisites:
+- Python 3.8+
+- pipenv
+- Redis
+- RapidAPI account
 ---
 
 ## **Setup Instructions**
@@ -71,7 +79,7 @@ The application uses `python-decouple` to manage sensitive environment variables
 ## **Usage**
 
 ### **1. Register a User**
-- Endpoint: `POST /api/register/`
+- Endpoint: `POST http://127.0.0.1:8000/api/v1/user/register/`
 - Body:
   ```json
   {
@@ -82,7 +90,7 @@ The application uses `python-decouple` to manage sensitive environment variables
   ```
 
 ### **2. Login**
-- Endpoint: `POST /api/login/`
+- Endpoint: `POST http://127.0.0.1:8000/api/v1/user/login/`
 - Body:
   ```json
   {
@@ -92,16 +100,43 @@ The application uses `python-decouple` to manage sensitive environment variables
   ```
 
 ### **3. Fetch Open-Ended Funds**
-- Endpoint: `http://127.0.0.1:8000/api/v1/funds/funds/?fundFamily=Aditya Birla Sun Life Mutual Fund`
+- Endpoint: `http://127.0.0.1:8000/api/v1/broker/load/funds/"Aditya Birla Sun Life Mutual Fund"`
 - Replace `<Aditya Birla Sun Life Mutual Fund>` with the desired fund family name.
 
-### **4. View Portfolio**
-- Endpoint: `GET /api/portfolio/`
+### **4.List all Funds from the rapid api**
+- Endpoint: `http://127.0.0.1:8000/api/v1/broker/funds/`
 
-### **5. Update NAVs**
-Manually update NAVs by running:
+### **5. Add Portfolio**
+- Endpoint: `POST http://127.0.0.1:8000/api/v1/broker/portfolio/`
+- Body:
+  ```json
+  {
+    "mutual_fund": "108274",  # this is mutual fund scheme id
+    "units": 10
+  }
+  ```
+
+### **6. View Portfolio**
+- Endpoint: `GET http://127.0.0.1:8000/api/v1/broker/portfolios/`
+
+
+## running the hourly task
+1. Running celery worker
 ```bash
-python manage.py update_navs
+celery -A main.celery worker --loglevel=info   
 ```
 
+2. Running celery beats
+```bash
+celery -A main.celery beat --loglevel=info    
+```
+---
+
+
+
+---
+## Running Tests
+```bash
+python manage.py test
+```
 ---

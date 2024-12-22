@@ -5,6 +5,7 @@ from .utils import fetch_open_ended_schemes
 @shared_task
 def update_portfolios_and_navs():
     # Fetch all mutual funds and their NAVs
+    print("Updating NAVs and portfolios...")
     all_funds = MutualFund.objects.all()
     data = fetch_open_ended_schemes(None, 'Open')
 
