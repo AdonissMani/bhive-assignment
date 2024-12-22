@@ -50,7 +50,7 @@ class UserTests(APITestCase):
         """
         Test that login fails with invalid credentials.
         """
-        url = reverse('user-login')  # Use the correct URL name for login
+        url = reverse('user-login')
         data = {
             'email': 'invalid@example.com',
             'password': 'wrongpassword',
