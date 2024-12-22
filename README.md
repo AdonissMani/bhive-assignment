@@ -11,6 +11,8 @@ This project implements a backend application for a mutual fund brokerage firm. 
 - View user portfolios
 - Track portfolio investment values
 - Hourly NAV updates via scheduled tasks
+- tests scripts to test all end point at once
+- POSTMAN collection
 
 ---
 
@@ -24,11 +26,10 @@ This project implements a backend application for a mutual fund brokerage firm. 
 - celery (for scheduling tasks)
 
 ---
----
 ## Prerequisites:
 - Python 3.8+
 - pipenv
-- Redis
+- Redis (its up and running)
 - RapidAPI account
 ---
 
@@ -67,12 +68,6 @@ python manage.py migrate
 python manage.py runserver
 ```
 Access the application at `http://127.0.0.1:8000/`.
-
----
-
-## **Environment Variables**
-The application uses `python-decouple` to manage sensitive environment variables. Ensure the following variables are set in your `.env` file:
-- `RAPIDAPI_KEY`: Your RapidAPI key for fetching mutual fund data.
 
 ---
 
@@ -119,7 +114,7 @@ The application uses `python-decouple` to manage sensitive environment variables
 ### **6. View Portfolio**
 - Endpoint: `GET http://127.0.0.1:8000/api/v1/broker/portfolios/`
 
-
+---
 ## running the hourly task
 1. Running celery worker
 ```bash
@@ -130,10 +125,6 @@ celery -A main.celery worker --loglevel=info
 ```bash
 celery -A main.celery beat --loglevel=info    
 ```
----
-
-
-
 ---
 ## Running Tests
 ```bash
